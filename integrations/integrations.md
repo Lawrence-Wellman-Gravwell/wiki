@@ -46,6 +46,7 @@ Palo Alto <network/paloalto>
 pfSense <network/pfsense>
 PiHole <network/pihole>
 Proxmox <network/proxmox>
+Slack <application/slack>
 Suricata <network/suricata>
 Syslog <generic/syslog>
 Sysmon <host/sysmon>
@@ -288,6 +289,12 @@ Zeek <network/zeek>
 :link: application/openweathermap
 :link-type: doc
 **Open Weather Map**
+:::
+
+:::{grid-item-card}
+:link: application/slack
+:link-type: doc
+**Slack**
 :::
 
 :::{grid-item-card}
