@@ -6,7 +6,8 @@
 :widths: 15, 25
 **Integration Details**
     Ingester, [Simple Relay](/ingesters/simple_relay)
-         Kit, [Cisco FTD Kit](https://github.com/gravwell/kits/tree/main/ciscoftd)
+    Preprocessor, [Regex Router](/ingesters/preprocessors/regexrouter.md)
+    Kit, [Cisco FTD Kit](https://github.com/gravwell/kits/tree/main/cisco_ftd)
 :::
 
 ## Cisco FTD Configuration
@@ -18,7 +19,7 @@ Things to note as you follow the logging setup:
 * Set IP address and port
 
 ```{warning}
-If using TCP for syslog, you probably want to check the `Allow user traffic to pass when TCP syslog server is down` check box. Otherwise, if the FTD is unable to connect to the Gravwell ingester, it will block _all_ new connections.
+If using TCP for syslog, select the **Allow user traffic to pass when TCP syslog server is down** check box. Otherwise, if the FTD is unable to connect to the Gravwell ingester, it will block _all_ new connections.
 ```
 
 ## Gravwell Configuration
@@ -40,7 +41,7 @@ Create or edit: `/opt/gravwell/etc/simple_relay.conf.d/cisco-ftd.conf`
 ```ini
 [Listener "syslogtcp_cisco_ftd"]
     Bind-String="tcp://0.0.0.0:6901"
-    Reader-Type=rfc5424
+    Reader-Type=rfc6587
     Tag-Name=cisco-ftd-events
     Assume-Local-Timezone=true
     Preprocessor="Cisco FTD 43000X Router"
@@ -62,8 +63,9 @@ Create or edit: `/opt/gravwell/etc/simple_relay.conf.d/cisco-ftd.conf`
 [preprocessor "Cisco FTD Class Router"]
     Type=regexrouter
     Drop-Misses=false
-    # Match any FTD message id EXCEPT 43000X (handled above).
-    Regex=`%FTD-[0-7]-(?P<class>(?!43000)\d{3})\d{3}:`
+    # Match the 3-digit class of every FTD message id. 43000X messages were already
+    # re-tagged above, and the 430 class has no route here, so they are left as they are.
+    Regex=`%FTD-[0-7]-(?P<class>\d{3})\d{3}:`
     Route-Extraction=class
 
     # auth
