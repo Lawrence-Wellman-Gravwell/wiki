@@ -31,6 +31,7 @@ Duo <application/duo>
 Fluentd <host/fluentd>
 Fortinet <network/fortinet>
 GitHub <application/github>
+IIS <host/iis>
 IPFIX <network/ipfix>
 IPMI <generic/ipmi>
 Jamf <host/jamf>
@@ -210,6 +211,14 @@ Zeek <network/zeek>
 :::
 
 :::{grid-item-card}
+:link: host/iis
+:link-type: doc
+**IIS**
+:::
+::::
+
+::::{grid} 4
+:::{grid-item-card}
 :link: host/jamf
 :link-type: doc
 **Jamf**
@@ -220,9 +229,7 @@ Zeek <network/zeek>
 :link-type: doc
 **Sysmon**
 :::
-::::
 
-::::{grid} 4
 :::{grid-item-card}
 :link: host/windowsevent
 :link-type: doc
