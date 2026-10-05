@@ -5,9 +5,9 @@
 :width: 45%
 :widths: 15, 25
 **Integration Details**
-    Ingester, • [Simple Relay](/ingesters/simple_relay) <br /> • [HTTP Ingester](/ingesters/http)
-Preprocessor, [Corelight JSON to TSV](/ingesters/preprocessors/regexextract.md)
-         Kit, [Palo Alto Kit](https://github.com/gravwell/kits/tree/main/paloalto)
+    Ingester, [Simple Relay](/ingesters/simple_relay) <br /> [HTTP Ingester](/ingesters/http)
+    Preprocessor, [Regex Router](/ingesters/preprocessors/regexrouter.md)
+    Kit, [Palo Alto Kit](https://github.com/gravwell/kits/tree/main/paloalto)
 :::
 
 ## Palo Alto Configuration
@@ -17,9 +17,9 @@ Preprocessor, [Corelight JSON to TSV](/ingesters/preprocessors/regexextract.md)
 
 Configure Syslog forwarding as described in the Palo Alto documentation:
 
-* `Transport`: Use the same protocol selected here in the `Bind-String` in the simple relay config.
-* `Port`: Use the same port selected here in the `Bind-String` in the simple relay config.
-* `Format`: IETF
+* **Transport**: Set to the protocol in the `Bind-String` of your Simple Relay listener.
+* **Port**: Set to the port in the `Bind-String` of your Simple Relay listener.
+* **Format**: Set to `IETF`.
 
 ![image](images/palo_syslog_setup.png)
 
@@ -30,20 +30,20 @@ Configure HTTP log forwarding as described in the Palo Alto documentation:
 
 #### HTTP Server Profile
 
-* `Address`: Field corresponds to the HTTP Ingester's address.
-* `Port`: Use the same port selected here in the `Bind` in the global section of your HTTP Ingester.
-* `HTTP Method`: Set field to POST.
-* `Username`: Use the same username here as in the HTTP ingester config.
-* `Password`: Use the same password here as in the HTTP ingester config.
+* **Address**: Set to the address of your HTTP Ingester.
+* **Port**: Set to the port in the `Bind` parameter in the global section of your HTTP Ingester.
+* **HTTP Method**: Set to `POST`.
+* **Username**: Set to the username in your HTTP Ingester listener.
+* **Password**: Set to the password in your HTTP Ingester listener.
 
-#### Payload Format tab 
-Set each log type as shown below in the image:
-* `URI Format`: Use the same path as set in the `URL` in the HTTP ingester config.
+#### Payload Format Tab
+Set each log type as shown in the image below, and set:
+* **URI Format**: Set to the `URL` value in your HTTP Ingester listener.
 
 ![image](images/palo_payload_format.png)
 
-#### Log Forwarding Profile 
-Create a log forwarding profile which sends all desired log types to the HTTP Server Profile created above. Note that it is possible to use one Log Forwarding Profile to send logs to both syslog and HTTP ingesters at the same time, if desired, as seen below:
+#### Log Forwarding Profile
+Create a log forwarding profile which sends all desired log types to the HTTP Server Profile created above. You can use one Log Forwarding Profile to send logs to both Simple Relay and the HTTP Ingester at the same time, as shown below:
 
 ![image](images/palo_log_forwarding.png)
 
@@ -66,7 +66,7 @@ Create or edit: `/opt/gravwell/etc/gravwell.conf.d/pan-well.conf`
 **Sample Palo Alto config:**  
 Create or edit: `/opt/gravwell/etc/simple_relay.conf.d/paloalto.conf`
 ```ini
-Listener "syslogtcp_paloalto"]
+[Listener "syslogtcp_paloalto"]
         Bind-String="tcp://0.0.0.0:6601"
         Reader-Type=line
         Tag-Name=pan_events
@@ -139,7 +139,7 @@ Log-File=/opt/gravwell/log/http_ingester.log #optional log file
 Health-Check-URL="/health/check"
 ```
 
-Create or edit: `/opt/gravwell/etc/gravwell_http_ingester.d/paloalto.conf`
+Create or edit: `/opt/gravwell/etc/gravwell_http_ingester.conf.d/paloalto.conf`
 ```
 [Listener "palo"]
         AuthType=basic
