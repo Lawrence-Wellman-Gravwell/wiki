@@ -47,6 +47,7 @@ pfSense <network/pfsense>
 PiHole <network/pihole>
 Proxmox <network/proxmox>
 Suricata <network/suricata>
+Synology <host/synology>
 Syslog <generic/syslog>
 Sysmon <host/sysmon>
 Teleport <application/teleport>
@@ -214,15 +215,21 @@ Zeek <network/zeek>
 :link-type: doc
 **Jamf**
 :::
+::::
+
+::::{grid} 4
+:::{grid-item-card}
+:link: host/synology
+:link-type: doc
+**Synology**
+:::
 
 :::{grid-item-card}
 :link: host/sysmon
 :link-type: doc
 **Sysmon**
 :::
-::::
 
-::::{grid} 4
 :::{grid-item-card}
 :link: host/windowsevent
 :link-type: doc
