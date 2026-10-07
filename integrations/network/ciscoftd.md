@@ -41,7 +41,7 @@ Create or edit: `/opt/gravwell/etc/simple_relay.conf.d/cisco-ftd.conf`
 ```ini
 [Listener "syslogtcp_cisco_ftd"]
     Bind-String="tcp://0.0.0.0:6901"
-    Reader-Type=rfc6587
+    Reader-Type=rfc5424
     Tag-Name=cisco-ftd-events
     Assume-Local-Timezone=true
     Preprocessor="Cisco FTD 43000X Router"
@@ -63,9 +63,8 @@ Create or edit: `/opt/gravwell/etc/simple_relay.conf.d/cisco-ftd.conf`
 [preprocessor "Cisco FTD Class Router"]
     Type=regexrouter
     Drop-Misses=false
-    # Match the 3-digit class of every FTD message id. 43000X messages were already
-    # re-tagged above, and the 430 class has no route here, so they are left as they are.
-    Regex=`%FTD-[0-7]-(?P<class>\d{3})\d{3}:`
+    # Match any FTD message id EXCEPT 43000X (handled above).
+    Regex=`%FTD-[0-7]-(?P<class>(?!43000)\d{3})\d{3}:`
     Route-Extraction=class
 
     # auth
