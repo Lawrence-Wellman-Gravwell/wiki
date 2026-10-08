@@ -13,6 +13,8 @@
 
 The UniFi Network application can export system, security, and client-activity logs. See Ubiquiti's documentation: [UniFi System Logs & SIEM Integration](https://help.ui.com/hc/en-us/articles/33349041044119).
 
+![image](images/ubiquiti.png)
+
 1. Open the UniFi Network application and go to **Integration > System Logging / SIEM** (some versions place this under **Settings > CyberSecure > Traffic Logging > Activity Logging (Syslog)**).
 2. Select **SIEM Server** as the destination.
 3. Choose the log categories to export: Monitoring, Internet, Power, Security (Firewall, Honeypot, Intrusion Prevention), and System (Admin Activity, Devices, Network, VPN).
