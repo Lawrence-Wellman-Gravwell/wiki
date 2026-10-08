@@ -50,6 +50,7 @@ Suricata <network/suricata>
 Syslog <generic/syslog>
 Sysmon <host/sysmon>
 Teleport <application/teleport>
+Ubiquiti UniFi <network/ubiquiti>
 Thinkst <network/thinkst>
 Windows Event <host/windowsevent>
 Zeek <network/zeek>
@@ -180,6 +181,12 @@ Zeek <network/zeek>
 :link: network/thinkst
 :link-type: doc
 **Thinkst**
+:::
+
+:::{grid-item-card}
+:link: network/ubiquiti
+:link-type: doc
+**Ubiquiti UniFi**
 :::
 
 :::{grid-item-card}
